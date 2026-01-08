@@ -9,11 +9,13 @@ const Header = () => {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
 
+  const whatsappLink = "https://wa.me/919544248794?text=Hi%2C%20I%27m%20interested%20in%20your%20herbal%20products";
+
   const navLinks = [
     { name: "Home", href: isHomePage ? "#" : "/" },
     { name: "Products", href: "/products" },
     { name: "About", href: isHomePage ? "#about" : "/#about" },
-    { name: "Contact", href: isHomePage ? "#contact" : "/#contact" },
+    { name: "Contact", href: whatsappLink, external: true },
   ];
 
   return (
@@ -31,6 +33,8 @@ const Header = () => {
               <li key={link.name}>
                 <a
                   href={link.href}
+                  target={link.external ? "_blank" : undefined}
+                  rel={link.external ? "noopener noreferrer" : undefined}
                   className="font-medium text-foreground/80 hover:text-primary transition-colors duration-300"
                 >
                   {link.name}
@@ -42,7 +46,7 @@ const Header = () => {
           {/* CTA */}
           <div className="hidden md:flex items-center gap-4">
             <Button variant="default" asChild>
-              <a href="#contact">Get in Touch</a>
+              <a href={whatsappLink} target="_blank" rel="noopener noreferrer">Get in Touch</a>
             </Button>
           </div>
 
@@ -64,6 +68,8 @@ const Header = () => {
                 <li key={link.name}>
                   <a
                     href={link.href}
+                    target={link.external ? "_blank" : undefined}
+                    rel={link.external ? "noopener noreferrer" : undefined}
                     className="block px-6 py-3 font-medium text-foreground/80 hover:text-primary hover:bg-secondary/50 transition-colors"
                     onClick={() => setIsMenuOpen(false)}
                   >
@@ -73,7 +79,7 @@ const Header = () => {
               ))}
               <li className="px-6 py-3">
                 <Button variant="default" className="w-full" asChild>
-                  <a href="#contact">Get in Touch</a>
+                  <a href={whatsappLink} target="_blank" rel="noopener noreferrer">Get in Touch</a>
                 </Button>
               </li>
             </ul>
