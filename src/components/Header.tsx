@@ -15,7 +15,7 @@ const Header = () => {
     { name: "Home", href: isHomePage ? "#" : "/" },
     { name: "Products", href: isHomePage ? "#products" : "/#products" },
     { name: "About", href: isHomePage ? "#about" : "/#about" },
-    { name: "Contact", href: whatsappLink, external: true },
+    { name: "Contact", href: isHomePage ? "#contact" : "/#contact" },
   ];
 
   return (
@@ -33,8 +33,6 @@ const Header = () => {
               <li key={link.name}>
                 <a
                   href={link.href}
-                  target={link.external ? "_blank" : undefined}
-                  rel={link.external ? "noopener noreferrer" : undefined}
                   className="font-medium text-foreground/80 hover:text-primary transition-colors duration-300"
                 >
                   {link.name}
@@ -68,8 +66,6 @@ const Header = () => {
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    target={link.external ? "_blank" : undefined}
-                    rel={link.external ? "noopener noreferrer" : undefined}
                     className="block px-6 py-3 font-medium text-foreground/80 hover:text-primary hover:bg-secondary/50 transition-colors"
                     onClick={() => setIsMenuOpen(false)}
                   >
