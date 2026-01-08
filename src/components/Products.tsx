@@ -1,5 +1,13 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Star, ArrowRight } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import { Star, ArrowRight, Leaf, Check } from "lucide-react";
 import product1 from "@/assets/product-1.jpg";
 import product2 from "@/assets/product-2.jpg";
 import product3 from "@/assets/product-3.jpg";
@@ -9,6 +17,10 @@ const products = [
     id: 1,
     name: "Herbal Wellness Oil",
     description: "Premium blend of rosemary, lavender & eucalyptus for daily wellness",
+    fullDescription: "Our signature Herbal Wellness Oil is a carefully crafted blend of organic rosemary, lavender, and eucalyptus essential oils. This premium formula is designed to promote relaxation, ease muscle tension, and support overall well-being. Perfect for massage, aromatherapy, or adding to your bath for a spa-like experience at home.",
+    benefits: ["Promotes relaxation & stress relief", "Eases muscle tension", "100% organic ingredients", "Suitable for all skin types"],
+    ingredients: "Organic Rosemary Oil, Organic Lavender Oil, Organic Eucalyptus Oil, Jojoba Oil, Vitamin E",
+    usage: "Apply a few drops to skin and massage gently. Can also be used in a diffuser or added to bath water.",
     rating: 4.9,
     reviews: 128,
     image: product1,
@@ -18,6 +30,10 @@ const products = [
     id: 2,
     name: "Calming Tea Blend",
     description: "Chamomile & lavender infusion for peaceful relaxation",
+    fullDescription: "Unwind with our Calming Tea Blend, a soothing herbal infusion crafted from the finest organic chamomile and lavender flowers. This caffeine-free blend is perfect for evening relaxation, helping you prepare for a restful night's sleep while enjoying a moment of tranquility.",
+    benefits: ["Promotes restful sleep", "Calms the mind naturally", "Caffeine-free", "Hand-blended with care"],
+    ingredients: "Organic Chamomile Flowers, Organic Lavender Buds, Organic Lemon Balm, Organic Passionflower",
+    usage: "Steep 1-2 teaspoons in hot water for 5-7 minutes. Enjoy 30 minutes before bedtime for best results.",
     rating: 4.8,
     reviews: 96,
     image: product2,
@@ -27,6 +43,10 @@ const products = [
     id: 3,
     name: "Aloe Repair Cream",
     description: "Natural skin healing with organic aloe vera & herbs",
+    fullDescription: "Our Aloe Repair Cream harnesses the powerful healing properties of organic aloe vera combined with a blend of soothing herbs. This rich, nourishing cream is designed to hydrate, repair, and protect your skin, making it ideal for dry, irritated, or sun-exposed skin.",
+    benefits: ["Deep hydration & repair", "Soothes irritated skin", "Non-greasy formula", "Dermatologist tested"],
+    ingredients: "Organic Aloe Vera, Shea Butter, Calendula Extract, Vitamin E, Chamomile Extract, Coconut Oil",
+    usage: "Apply generously to affected areas as needed. For best results, use after cleansing morning and night.",
     rating: 4.9,
     reviews: 156,
     image: product3,
@@ -34,7 +54,11 @@ const products = [
   },
 ];
 
+type Product = typeof products[0];
+
 const Products = () => {
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+
   return (
     <section id="products" className="py-24 bg-secondary/30">
       <div className="container mx-auto px-6">
@@ -98,11 +122,14 @@ const Products = () => {
                 </p>
 
                 {/* CTA */}
-                <Button variant="outline" size="sm" className="w-full group/btn" asChild>
-                  <a href="#contact">
-                    Learn More
-                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
-                  </a>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="w-full group/btn"
+                  onClick={() => setSelectedProduct(product)}
+                >
+                  Learn More
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
                 </Button>
               </div>
             </div>
@@ -119,6 +146,86 @@ const Products = () => {
           </Button>
         </div>
       </div>
+
+      {/* Product Detail Dialog */}
+      <Dialog open={!!selectedProduct} onOpenChange={() => setSelectedProduct(null)}>
+        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+          {selectedProduct && (
+            <>
+              <div className="relative aspect-video overflow-hidden rounded-lg mb-6">
+                <img
+                  src={selectedProduct.image}
+                  alt={selectedProduct.name}
+                  className="w-full h-full object-cover"
+                />
+                {selectedProduct.badge && (
+                  <span className="absolute top-4 left-4 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium">
+                    {selectedProduct.badge}
+                  </span>
+                )}
+              </div>
+              
+              <DialogHeader>
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="flex items-center text-amber-500">
+                    <Star className="h-4 w-4 fill-current" />
+                    <span className="ml-1 text-sm font-medium text-foreground">
+                      {selectedProduct.rating}
+                    </span>
+                  </div>
+                  <span className="text-muted-foreground text-sm">
+                    ({selectedProduct.reviews} reviews)
+                  </span>
+                </div>
+                <DialogTitle className="text-2xl font-serif">
+                  {selectedProduct.name}
+                </DialogTitle>
+                <DialogDescription className="text-base text-muted-foreground">
+                  {selectedProduct.fullDescription}
+                </DialogDescription>
+              </DialogHeader>
+
+              {/* Benefits */}
+              <div className="mt-6">
+                <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
+                  <Leaf className="h-5 w-5 text-primary" />
+                  Key Benefits
+                </h4>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {selectedProduct.benefits.map((benefit, index) => (
+                    <li key={index} className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <Check className="h-4 w-4 text-primary flex-shrink-0" />
+                      {benefit}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Ingredients */}
+              <div className="mt-6">
+                <h4 className="font-semibold text-foreground mb-2">Ingredients</h4>
+                <p className="text-sm text-muted-foreground">{selectedProduct.ingredients}</p>
+              </div>
+
+              {/* How to Use */}
+              <div className="mt-6">
+                <h4 className="font-semibold text-foreground mb-2">How to Use</h4>
+                <p className="text-sm text-muted-foreground">{selectedProduct.usage}</p>
+              </div>
+
+              {/* CTA */}
+              <div className="mt-8">
+                <Button className="w-full" size="lg" asChild>
+                  <a href="#contact">
+                    Inquire About This Product
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </a>
+                </Button>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };
