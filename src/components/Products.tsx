@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Star, ShoppingCart } from "lucide-react";
+import { Star, ArrowRight } from "lucide-react";
 import product1 from "@/assets/product-1.jpg";
 import product2 from "@/assets/product-2.jpg";
 import product3 from "@/assets/product-3.jpg";
@@ -9,7 +9,6 @@ const products = [
     id: 1,
     name: "Herbal Wellness Oil",
     description: "Premium blend of rosemary, lavender & eucalyptus for daily wellness",
-    price: 34.99,
     rating: 4.9,
     reviews: 128,
     image: product1,
@@ -19,7 +18,6 @@ const products = [
     id: 2,
     name: "Calming Tea Blend",
     description: "Chamomile & lavender infusion for peaceful relaxation",
-    price: 24.99,
     rating: 4.8,
     reviews: 96,
     image: product2,
@@ -29,7 +27,6 @@ const products = [
     id: 3,
     name: "Aloe Repair Cream",
     description: "Natural skin healing with organic aloe vera & herbs",
-    price: 42.99,
     rating: 4.9,
     reviews: 156,
     image: product3,
@@ -100,16 +97,13 @@ const Products = () => {
                   {product.description}
                 </p>
 
-                {/* Price & CTA */}
-                <div className="flex items-center justify-between">
-                  <span className="text-2xl font-serif font-bold text-primary">
-                    ${product.price}
-                  </span>
-                  <Button size="sm" className="gap-2">
-                    <ShoppingCart className="h-4 w-4" />
-                    Add to Cart
-                  </Button>
-                </div>
+                {/* CTA */}
+                <Button variant="outline" size="sm" className="w-full group/btn" asChild>
+                  <a href="#contact">
+                    Learn More
+                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+                  </a>
+                </Button>
               </div>
             </div>
           ))}
@@ -117,8 +111,11 @@ const Products = () => {
 
         {/* View All */}
         <div className="text-center mt-12">
-          <Button variant="outline" size="lg">
-            View All Products
+          <Button variant="outline" size="lg" asChild>
+            <a href="#contact">
+              Inquire About Our Products
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </a>
           </Button>
         </div>
       </div>
