@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Menu, X, ShoppingBag } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
 
@@ -36,15 +36,11 @@ const Header = () => {
             ))}
           </ul>
 
-          {/* CTA & Cart */}
+          {/* CTA */}
           <div className="hidden md:flex items-center gap-4">
-            <Button variant="ghost" size="icon" className="relative">
-              <ShoppingBag className="h-5 w-5" />
-              <span className="absolute -top-1 -right-1 h-5 w-5 bg-primary text-primary-foreground text-xs rounded-full flex items-center justify-center">
-                0
-              </span>
+            <Button variant="default" asChild>
+              <a href="#contact">Get in Touch</a>
             </Button>
-            <Button variant="default">Shop Now</Button>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -73,7 +69,9 @@ const Header = () => {
                 </li>
               ))}
               <li className="px-6 py-3">
-                <Button variant="default" className="w-full">Shop Now</Button>
+                <Button variant="default" className="w-full" asChild>
+                  <a href="#contact">Get in Touch</a>
+                </Button>
               </li>
             </ul>
           </div>
