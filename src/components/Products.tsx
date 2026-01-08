@@ -8,6 +8,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { Star, ArrowRight, Leaf, Check } from "lucide-react";
+import { Link } from "react-router-dom";
 import product1 from "@/assets/product-1.jpg";
 import product2 from "@/assets/product-2.jpg";
 import product3 from "@/assets/product-3.jpg";
@@ -139,10 +140,10 @@ const Products = () => {
         {/* View All */}
         <div className="text-center mt-12">
           <Button variant="outline" size="lg" asChild>
-            <a href="#contact">
-              Inquire About Our Products
+            <Link to="/products">
+              View All Products
               <ArrowRight className="ml-2 h-5 w-5" />
-            </a>
+            </Link>
           </Button>
         </div>
       </div>
