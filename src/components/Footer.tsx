@@ -53,6 +53,12 @@ const Footer = () => {
                   +91 80896 73738
                 </a>
               </div>
+              <div className="flex items-center gap-3">
+                <Mail className="h-4 w-4 text-accent" />
+                <a href="mailto:info@leafyherbal.in" className="hover:text-accent transition-colors">
+                  info@leafyherbal.in
+                </a>
+              </div>
             </div>
           </div>
 
