@@ -91,9 +91,9 @@ const Products = () => {
           </p>
         </div>
 
-        {/* Products Grid */}
+        {/* Products Grid - Show only first 3 on home page */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {products.map((product, index) => (
+          {products.slice(0, 3).map((product, index) => (
             <div
               key={product.id}
               className="group bg-card rounded-2xl overflow-hidden shadow-soft hover-lift"
