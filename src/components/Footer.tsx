@@ -37,23 +37,21 @@ const Footer = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <img src={logo} alt="Leafy" className="h-12 w-auto mb-6 brightness-0 invert" />
+            <img src={logo} alt="Leafy Herbal Products" className="h-12 w-auto mb-6 brightness-0 invert" />
             <p className="text-primary-foreground/70 mb-6 max-w-sm">
               Bringing nature's healing power to your doorstep. Handcrafted 
               herbal products for your wellness journey.
             </p>
             <div className="space-y-3 text-sm text-primary-foreground/70">
-              <div className="flex items-center gap-3">
-                <MapPin className="h-4 w-4 text-accent" />
-                <span>123 Botanical Lane, Green Valley, CA 90210</span>
+              <div className="flex items-start gap-3">
+                <MapPin className="h-4 w-4 text-accent mt-0.5" />
+                <span>Payyoli, Kozhikkode<br />Kerala, India</span>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="h-4 w-4 text-accent" />
-                <span>+1 (555) 123-4567</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <Mail className="h-4 w-4 text-accent" />
-                <span>hello@leafy.com</span>
+                <a href="tel:+918089673738" className="hover:text-accent transition-colors">
+                  +91 80896 73738
+                </a>
               </div>
             </div>
           </div>
@@ -111,7 +109,7 @@ const Footer = () => {
         {/* Bottom */}
         <div className="border-t border-primary-foreground/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-primary-foreground/60 text-sm">
-            © {currentYear} Leafy. All rights reserved.
+            © {currentYear} Leafy Herbal Products. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
             {socialLinks.map((social) => (
