@@ -13,7 +13,7 @@ const Header = () => {
 
   const navLinks = [
     { name: "Home", href: isHomePage ? "#" : "/" },
-    { name: "Products", href: "/products" },
+    { name: "Products", href: isHomePage ? "#products" : "/#products" },
     { name: "About", href: isHomePage ? "#about" : "/#about" },
     { name: "Contact", href: whatsappLink, external: true },
   ];
