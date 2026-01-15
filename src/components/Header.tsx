@@ -12,10 +12,10 @@ const Header = () => {
   const whatsappLink = "https://wa.me/971588355652";
 
   const navLinks = [
-    { name: "Home", href: isHomePage ? "#" : "/" },
-    { name: "Products", href: isHomePage ? "#products" : "/#products" },
+    { name: "Home", href: "/" },
+    { name: "Products", href: "/products" },
     { name: "About", href: isHomePage ? "#about" : "/#about" },
-    { name: "Contact", href: isHomePage ? "#contact" : "/#contact" },
+    { name: "Contact", href: "/contact" },
   ];
 
   return (
