@@ -115,7 +115,15 @@ const Footer = () => {
         {/* Bottom */}
         <div className="border-t border-primary-foreground/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-primary-foreground/60 text-sm">
-            © {currentYear} Leafy Herbal Products. All rights reserved.
+            © {currentYear} Leafy Herbal Products. All rights reserved. | Developed and designed by{" "}
+            <a 
+              href="https://appmatixsolutions.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hover:text-accent transition-colors"
+            >
+              Appmatix Solutions
+            </a>
           </p>
           <div className="flex items-center gap-4">
             {socialLinks.map((social) => (
