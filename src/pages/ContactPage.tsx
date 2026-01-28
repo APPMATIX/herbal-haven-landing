@@ -41,7 +41,7 @@ const ContactPage = () => {
           email: formData.email,
           phone: formData.phone,
           message: formData.message,
-          subject: `New Contact Form Submission from ${formData.name}`,
+          subject: `New Contact Form Submission from Leafy ${formData.name}`,
         }),
       });
 
