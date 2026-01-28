@@ -49,9 +49,10 @@ const OurStory = () => {
                 ingredients from God's Own Country, honoring the wisdom our elders passed on to us.
               </p>
               <p>
-                From our grandmother's Chembarathi hair oil recipes to nourishing skincare 
-                formulations, every product carries our family's legacy of quality, authenticity, 
-                and genuine care for your well-being.
+                Today, Leafy Herbal Products continues this family tradition, bringing 
+                you authentic Kerala herbal remedies crafted with the same love and care 
+                that has defined our family for generations. Every product we create 
+                reflects our commitment to purity, tradition, and your natural wellness journey.
               </p>
             </div>
           </motion.div>
