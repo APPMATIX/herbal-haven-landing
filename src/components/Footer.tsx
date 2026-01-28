@@ -5,23 +5,23 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const footerLinks = {
-    products: [
-      { name: "Essential Oils", href: "#" },
-      { name: "Herbal Teas", href: "#" },
-      { name: "Skincare", href: "#" },
-      { name: "Supplements", href: "#" },
+    quickLinks: [
+      { name: "Home", href: "/" },
+      { name: "Products", href: "/products" },
+      { name: "Our Story", href: "/#about" },
+      { name: "Contact", href: "/contact" },
     ],
-    company: [
-      { name: "About Us", href: "#" },
-      { name: "Our Story", href: "#" },
-      { name: "Sustainability", href: "#" },
-      { name: "Careers", href: "#" },
+    products: [
+      { name: "Hair Care", href: "/products" },
+      { name: "Skin Care", href: "/products" },
+      { name: "Essential Oils", href: "/products" },
+      { name: "All Products", href: "/products" },
     ],
     support: [
-      { name: "FAQ", href: "#" },
-      { name: "Shipping", href: "#" },
-      { name: "Returns", href: "#" },
-      { name: "Contact", href: "#" },
+      { name: "Contact Us", href: "/contact" },
+      { name: "WhatsApp", href: "https://wa.me/918089673738" },
+      { name: "Email Us", href: "mailto:info@leafyherbal.in" },
+      { name: "Call Us", href: "tel:+918089673738" },
     ],
   };
 
@@ -62,11 +62,11 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Links */}
+          {/* Quick Links */}
           <div>
-            <h4 className="font-serif font-semibold text-lg mb-4">Products</h4>
+            <h4 className="font-serif font-semibold text-lg mb-4">Quick Links</h4>
             <ul className="space-y-3">
-              {footerLinks.products.map((link) => (
+              {footerLinks.quickLinks.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
@@ -79,10 +79,11 @@ const Footer = () => {
             </ul>
           </div>
 
+          {/* Products */}
           <div>
-            <h4 className="font-serif font-semibold text-lg mb-4">Company</h4>
+            <h4 className="font-serif font-semibold text-lg mb-4">Products</h4>
             <ul className="space-y-3">
-              {footerLinks.company.map((link) => (
+              {footerLinks.products.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
