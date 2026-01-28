@@ -39,19 +39,19 @@ const OurStory = () => {
             </h2>
             <div className="space-y-4 text-muted-foreground">
               <p>
-                Founded with a passion for natural wellness, Leafy Herbal Products began 
-                as a small family venture dedicated to bringing the purest herbal remedies 
-                to homes across the UAE.
+                Rooted in the rich Ayurvedic traditions of Kerala, Leafy Herbal Products 
+                began as a small family venture dedicated to bringing the purest herbal 
+                remedies from God's Own Country to homes everywhere.
               </p>
               <p>
                 Our journey started with a simple belief: nature holds the key to true 
-                wellness. Today, we continue to honor that belief by carefully selecting 
-                and crafting products that harness the power of herbs and natural ingredients.
+                wellness. Drawing from Kerala's ancient wisdom and abundant natural resources, 
+                we carefully select and craft products that harness the power of traditional herbs.
               </p>
               <p>
-                From traditional hair oils to nourishing skincare, every product in our 
-                collection is a testament to our commitment to quality, authenticity, 
-                and your well-being.
+                From traditional Chembarathi hair oils to nourishing skincare, every product 
+                in our collection is a testament to Kerala's herbal heritage and our commitment 
+                to quality, authenticity, and your well-being.
               </p>
             </div>
           </motion.div>

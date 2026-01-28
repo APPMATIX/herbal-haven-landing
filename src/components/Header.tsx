@@ -9,7 +9,7 @@ const Header = () => {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
 
-  const whatsappLink = "https://wa.me/971588355652";
+  const whatsappLink = "https://wa.me/919876543210";
 
   const navLinks = [
     { name: "Home", href: "/" },
