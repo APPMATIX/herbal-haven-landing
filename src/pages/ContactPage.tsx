@@ -45,8 +45,8 @@ const ContactPage = () => {
     {
       icon: Phone,
       title: "Phone",
-      details: "+971 58 835 5652",
-      link: "tel:+971588355652",
+      details: "+91 98765 43210",
+      link: "tel:+919876543210",
     },
     {
       icon: Mail,
@@ -57,7 +57,7 @@ const ContactPage = () => {
     {
       icon: MapPin,
       title: "Location",
-      details: "Dubai, UAE",
+      details: "Kerala, India",
       link: null,
     },
     {
@@ -255,7 +255,7 @@ const ContactPage = () => {
                   </p>
                   <Button asChild className="gap-2">
                     <a
-                      href="https://wa.me/971588355652"
+                      href="https://wa.me/919876543210"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
