@@ -27,7 +27,7 @@ const Footer = () => {
 
   const socialLinks = [
     { icon: Instagram, href: "https://www.instagram.com/leafy_herbal_products/", label: "Instagram" },
-    { icon: Facebook, href: "#", label: "Facebook" },
+    { icon: Facebook, href: "https://www.facebook.com/profile.php?id=61586795342031", label: "Facebook" },
     { icon: Twitter, href: "#", label: "Twitter" },
   ];
 
