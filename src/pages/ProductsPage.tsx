@@ -407,10 +407,14 @@ const ProductsPage = () => {
               {/* CTA */}
               <div className="mt-8">
                 <Button className="w-full" size="lg" asChild>
-                  <Link to="/#contact">
+                  <a 
+                    href={`https://wa.me/918089673738?text=${encodeURIComponent(`Hi, I'm interested in the "${selectedProduct.name}" product.\n\nProduct Details:\n• Category: ${selectedProduct.category}\n• Description: ${selectedProduct.description}\n\nPlease provide more information about pricing and availability.`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Inquire About This Product
                     <ArrowRight className="ml-2 h-5 w-5" />
-                  </Link>
+                  </a>
                 </Button>
               </div>
             </>
