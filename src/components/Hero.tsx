@@ -1,9 +1,34 @@
 import { useEffect, useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Leaf, Sparkles } from "lucide-react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import AnimatedCounter from "./AnimatedCounter";
+import { motion, useScroll, useTransform, useInView, animate } from "framer-motion";
 import heroBg from "@/assets/hero-bg.jpg";
+
+// Counting animation component
+const CountUp = ({ end, suffix = "" }: { end: number; suffix?: string }) => {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, amount: 0.5 });
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    const controls = animate(0, end, {
+      duration: 2,
+      ease: "easeOut",
+      onUpdate: (value) => setCount(Math.floor(value)),
+    });
+
+    return () => controls.stop();
+  }, [isInView, end]);
+
+  return (
+    <span ref={ref}>
+      {count}
+      {suffix}
+    </span>
+  );
+};
 
 const Hero = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -150,8 +175,9 @@ const Hero = () => {
           {/* Animated Stats */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            animate={isLoaded ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 1.3 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.6 }}
             className="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-primary-foreground/20"
           >
             {[
@@ -162,19 +188,20 @@ const Hero = () => {
               <motion.div
                 key={stat.label}
                 initial={{ opacity: 0, scale: 0.8 }}
-                animate={isLoaded ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.5, delay: 1.5 + index * 0.1 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.15 }}
                 whileHover={{ scale: 1.1 }}
                 className="cursor-default"
               >
-                <p className="text-3xl md:text-4xl font-serif font-bold text-primary-foreground">
-                  <AnimatedCounter
-                    end={stat.value}
-                    suffix={stat.suffix}
-                    isInView={isLoaded}
-                    duration={2000}
-                  />
-                </p>
+                <motion.p 
+                  className="text-3xl md:text-4xl font-serif font-bold text-primary-foreground"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                >
+                  <CountUp end={stat.value} suffix={stat.suffix} />
+                </motion.p>
                 <p className="text-sm text-primary-foreground/70">{stat.label}</p>
               </motion.div>
             ))}
