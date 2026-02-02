@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -7,8 +7,9 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import { Star, ArrowRight, Leaf, Check } from "lucide-react";
+import { Star, ArrowRight, Leaf, Check, ShoppingBag } from "lucide-react";
 import { Link } from "react-router-dom";
+import { motion, useInView } from "framer-motion";
 import product1 from "@/assets/product-1.jpg";
 import product2 from "@/assets/product-2.jpg";
 import product3 from "@/assets/product-3.jpg";
@@ -71,54 +72,151 @@ const products = [
 
 type Product = typeof products[0];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.25, 0.46, 0.45, 0.94] as const,
+    },
+  },
+};
+
 const Products = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [hoveredProduct, setHoveredProduct] = useState<number | null>(null);
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   return (
-    <section id="products" className="py-24 bg-secondary/30">
+    <section id="products" className="py-24 bg-secondary/30" ref={sectionRef}>
       <div className="container mx-auto px-6">
         {/* Header */}
-        <div className="text-center mb-16">
-          <span className="text-primary font-medium tracking-wider uppercase text-sm">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <motion.span
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="inline-block text-primary font-medium tracking-wider uppercase text-sm"
+          >
             Our Products
-          </span>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-foreground mt-3 mb-4">
+          </motion.span>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-4xl md:text-5xl font-serif font-bold text-foreground mt-3 mb-4"
+          >
             Nature's Finest Selection
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            Each product is carefully crafted using time-honored recipes and 
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-muted-foreground max-w-2xl mx-auto text-lg"
+          >
+            Each product is carefully crafted using time-honored recipes and
             the purest organic ingredients from sustainable sources.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
-        {/* Products Grid - Show only first 3 on home page */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Products Grid */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
           {products.slice(0, 3).map((product, index) => (
-            <div
+            <motion.div
               key={product.id}
-              className="group bg-card rounded-2xl overflow-hidden shadow-soft hover-lift"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              variants={itemVariants}
+              onMouseEnter={() => setHoveredProduct(product.id)}
+              onMouseLeave={() => setHoveredProduct(null)}
+              className="group bg-card rounded-2xl overflow-hidden shadow-soft relative"
             >
               {/* Image Container */}
               <div className="relative overflow-hidden aspect-square">
-                <img
+                <motion.img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="w-full h-full object-cover"
+                  animate={{
+                    scale: hoveredProduct === product.id ? 1.1 : 1,
+                  }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
                 />
+                
+                {/* Overlay on hover */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: hoveredProduct === product.id ? 1 : 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="absolute inset-0 bg-foreground/20 flex items-center justify-center"
+                >
+                  <motion.div
+                    initial={{ scale: 0, rotate: -180 }}
+                    animate={{
+                      scale: hoveredProduct === product.id ? 1 : 0,
+                      rotate: hoveredProduct === product.id ? 0 : -180,
+                    }}
+                    transition={{ duration: 0.4, type: "spring" }}
+                  >
+                    <ShoppingBag className="h-12 w-12 text-primary-foreground" />
+                  </motion.div>
+                </motion.div>
+
                 {product.badge && (
-                  <span className="absolute top-4 left-4 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium">
+                  <motion.span
+                    initial={{ x: -100, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: 0.3 + index * 0.1, type: "spring" }}
+                    className="absolute top-4 left-4 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium"
+                  >
                     {product.badge}
-                  </span>
+                  </motion.span>
                 )}
               </div>
 
               {/* Content */}
               <div className="p-6">
                 {/* Rating */}
-                <div className="flex items-center gap-2 mb-3">
+                <motion.div
+                  className="flex items-center gap-2 mb-3"
+                  whileHover={{ scale: 1.05 }}
+                >
                   <div className="flex items-center text-amber-500">
-                    <Star className="h-4 w-4 fill-current" />
+                    {[...Array(5)].map((_, i) => (
+                      <motion.div
+                        key={i}
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.5 + i * 0.05 }}
+                      >
+                        <Star
+                          className={`h-4 w-4 ${
+                            i < Math.floor(product.rating) ? "fill-current" : ""
+                          }`}
+                        />
+                      </motion.div>
+                    ))}
                     <span className="ml-1 text-sm font-medium text-foreground">
                       {product.rating}
                     </span>
@@ -126,10 +224,10 @@ const Products = () => {
                   <span className="text-muted-foreground text-sm">
                     ({product.reviews} reviews)
                   </span>
-                </div>
+                </motion.div>
 
                 {/* Title & Description */}
-                <h3 className="text-xl font-serif font-semibold text-foreground mb-2">
+                <h3 className="text-xl font-serif font-semibold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
                   {product.name}
                 </h3>
                 <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
@@ -137,36 +235,51 @@ const Products = () => {
                 </p>
 
                 {/* CTA */}
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  className="w-full group/btn"
-                  onClick={() => setSelectedProduct(product)}
-                >
-                  Learn More
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
-                </Button>
+                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="w-full group/btn overflow-hidden relative"
+                    onClick={() => setSelectedProduct(product)}
+                  >
+                    <span className="relative z-10 flex items-center justify-center w-full">
+                      Learn More
+                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+                    </span>
+                  </Button>
+                </motion.div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* View All */}
-        <div className="text-center mt-12">
-          <Button variant="outline" size="lg" asChild>
-            <Link to="/products">
-              View All Products
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
-          </Button>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="text-center mt-12"
+        >
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
+            <Button variant="outline" size="lg" asChild>
+              <Link to="/products">
+                View All Products
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
+          </motion.div>
+        </motion.div>
       </div>
 
       {/* Product Detail Dialog */}
       <Dialog open={!!selectedProduct} onOpenChange={() => setSelectedProduct(null)}>
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           {selectedProduct && (
-            <>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+            >
               <div className="relative aspect-video overflow-hidden rounded-lg mb-6">
                 <img
                   src={selectedProduct.image}
@@ -179,7 +292,7 @@ const Products = () => {
                   </span>
                 )}
               </div>
-              
+
               <DialogHeader>
                 <div className="flex items-center gap-2 mb-2">
                   <div className="flex items-center text-amber-500">
@@ -208,10 +321,16 @@ const Products = () => {
                 </h4>
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {selectedProduct.benefits.map((benefit, index) => (
-                    <li key={index} className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <motion.li
+                      key={index}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      className="flex items-center gap-2 text-sm text-muted-foreground"
+                    >
                       <Check className="h-4 w-4 text-primary flex-shrink-0" />
                       {benefit}
-                    </li>
+                    </motion.li>
                   ))}
                 </ul>
               </div>
@@ -229,15 +348,15 @@ const Products = () => {
               </div>
 
               {/* CTA */}
-              <div className="mt-8">
+              <motion.div className="mt-8" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                 <Button className="w-full" size="lg" asChild>
                   <a href="#contact">
                     Inquire About This Product
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </a>
                 </Button>
-              </div>
-            </>
+              </motion.div>
+            </motion.div>
           )}
         </DialogContent>
       </Dialog>
