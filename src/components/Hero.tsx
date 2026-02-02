@@ -183,16 +183,22 @@ const Hero = () => {
       </motion.div>
 
       {/* Scroll Indicator */}
-      <motion.div
+      <motion.button
         initial={{ opacity: 0 }}
         animate={isLoaded ? { opacity: 1 } : {}}
         transition={{ delay: 2 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10"
+        onClick={() => {
+          document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' });
+        }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 cursor-pointer"
+        aria-label="Scroll to products"
       >
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-          className="w-6 h-10 border-2 border-primary-foreground/30 rounded-full flex justify-center pt-2"
+          className="w-6 h-10 border-2 border-primary-foreground/30 rounded-full flex justify-center pt-2 hover:border-primary-foreground/60 transition-colors"
         >
           <motion.div
             animate={{ opacity: [1, 0, 1], y: [0, 8, 0] }}
@@ -200,7 +206,7 @@ const Hero = () => {
             className="w-1.5 h-1.5 bg-primary-foreground/60 rounded-full"
           />
         </motion.div>
-      </motion.div>
+      </motion.button>
 
       {/* Decorative Elements */}
       {/* Bottom fade removed for cleaner look */}
