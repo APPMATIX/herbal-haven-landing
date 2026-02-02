@@ -33,7 +33,7 @@ const Hero = () => {
           alt="Herbal garden"
           className="w-full h-[120%] object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-foreground/70 via-foreground/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-foreground/40 via-foreground/20 to-transparent" />
       </motion.div>
 
       {/* Floating Particles */}
