@@ -222,3 +222,20 @@
     transform: scale(1);
   }
 }
+
+/* Hide scrollbar for category filters on mobile */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Improve touch targets on mobile */
+@media (max-width: 640px) {
+  .touch-manipulation {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
