@@ -59,8 +59,8 @@ const Benefits = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <section id="about" className="py-24 bg-background" ref={sectionRef}>
-      <div className="container mx-auto px-6">
+    <section id="about" className="py-16 sm:py-24 bg-background" ref={sectionRef}>
+      <div className="container mx-auto px-5 sm:px-6">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -80,7 +80,7 @@ const Benefits = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-4xl md:text-5xl font-serif font-bold text-foreground mt-3 mb-4"
+            className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-foreground mt-3 mb-4"
           >
             The Leafy Difference
           </motion.h2>
@@ -100,7 +100,7 @@ const Benefits = () => {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6"
         >
           {benefits.map((benefit, index) => (
             <motion.div
@@ -111,7 +111,7 @@ const Benefits = () => {
               className="group relative"
             >
               <motion.div
-                className="relative text-center p-8 rounded-2xl bg-secondary/50 overflow-hidden cursor-pointer h-full"
+                className="relative text-center p-4 sm:p-8 rounded-xl sm:rounded-2xl bg-secondary/50 overflow-hidden cursor-pointer h-full"
                 whileHover={{ y: -8 }}
                 transition={{ duration: 0.3 }}
               >
@@ -152,23 +152,23 @@ const Benefits = () => {
 
                 {/* Icon */}
                 <motion.div
-                  className="relative z-10 inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 group-hover:bg-primary-foreground/20 mb-6 transition-colors duration-500"
+                  className="relative z-10 inline-flex items-center justify-center w-10 h-10 sm:w-16 sm:h-16 rounded-full bg-primary/10 group-hover:bg-primary-foreground/20 mb-3 sm:mb-6 transition-colors duration-500"
                   animate={{
                     rotate: hoveredIndex === index ? [0, -10, 10, 0] : 0,
                     scale: hoveredIndex === index ? 1.1 : 1,
                   }}
                   transition={{ duration: 0.5 }}
                 >
-                  <benefit.icon className="h-8 w-8 text-primary group-hover:text-primary-foreground transition-colors duration-500" />
+                  <benefit.icon className="h-5 w-5 sm:h-8 sm:w-8 text-primary group-hover:text-primary-foreground transition-colors duration-500" />
                 </motion.div>
 
                 {/* Title */}
-                <h3 className="relative z-10 text-xl font-serif font-semibold text-foreground group-hover:text-primary-foreground mb-3 transition-colors duration-500">
+                <h3 className="relative z-10 text-sm sm:text-xl font-serif font-semibold text-foreground group-hover:text-primary-foreground mb-1.5 sm:mb-3 transition-colors duration-500">
                   {benefit.title}
                 </h3>
 
                 {/* Description */}
-                <p className="relative z-10 text-muted-foreground group-hover:text-primary-foreground/80 transition-colors duration-500">
+                <p className="relative z-10 text-xs sm:text-base text-muted-foreground group-hover:text-primary-foreground/80 transition-colors duration-500">
                   {benefit.description}
                 </p>
 
@@ -185,7 +185,7 @@ const Benefits = () => {
         </motion.div>
 
         {/* Floating decorative elements */}
-        <div className="relative h-20 mt-12">
+        <div className="relative h-20 mt-12 hidden sm:block">
           <motion.div
             className="absolute left-1/4 top-0 w-3 h-3 bg-primary/30 rounded-full"
             animate={{

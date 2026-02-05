@@ -59,8 +59,8 @@ const Testimonials = () => {
   };
 
   return (
-    <section className="py-24 bg-primary/5 overflow-hidden" ref={sectionRef}>
-      <div className="container mx-auto px-6">
+    <section className="py-16 sm:py-24 bg-primary/5 overflow-hidden" ref={sectionRef}>
+      <div className="container mx-auto px-5 sm:px-6">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -80,7 +80,7 @@ const Testimonials = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-4xl md:text-5xl font-serif font-bold text-foreground mt-3 mb-4"
+            className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-foreground mt-3 mb-4"
           >
             What Our Customers Say
           </motion.h2>
@@ -102,7 +102,7 @@ const Testimonials = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="relative max-w-4xl mx-auto mb-12"
         >
-          <div className="relative bg-card rounded-3xl p-8 md:p-12 shadow-medium overflow-hidden">
+          <div className="relative bg-card rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-12 shadow-medium overflow-hidden">
             {/* Decorative background */}
             <motion.div
               className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl"
@@ -113,7 +113,7 @@ const Testimonials = () => {
               transition={{ duration: 4, repeat: Infinity }}
             />
 
-            <Quote className="absolute top-8 right-8 h-16 w-16 text-primary/10" />
+            <Quote className="absolute top-4 right-4 sm:top-8 sm:right-8 h-10 w-10 sm:h-16 sm:w-16 text-primary/10" />
 
             <AnimatePresence mode="wait">
               <motion.div
@@ -125,7 +125,7 @@ const Testimonials = () => {
                 className="relative z-10"
               >
                 {/* Rating */}
-                <div className="flex gap-1 mb-6">
+                <div className="flex gap-1 mb-4 sm:mb-6">
                   {[...Array(testimonials[activeIndex].rating)].map((_, i) => (
                     <motion.div
                       key={i}
@@ -133,26 +133,26 @@ const Testimonials = () => {
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: i * 0.1 }}
                     >
-                      <Star className="h-6 w-6 text-amber-500 fill-current" />
+                      <Star className="h-5 w-5 sm:h-6 sm:w-6 text-amber-500 fill-current" />
                     </motion.div>
                   ))}
                 </div>
 
                 {/* Content */}
-                <p className="text-xl md:text-2xl text-foreground/90 mb-8 italic leading-relaxed font-serif">
+                <p className="text-base sm:text-xl md:text-2xl text-foreground/90 mb-5 sm:mb-8 italic leading-relaxed font-serif">
                   "{testimonials[activeIndex].content}"
                 </p>
 
                 {/* Author */}
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-3 sm:gap-4">
                   <motion.div
-                    className="w-14 h-14 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-semibold text-xl"
+                    className="w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-semibold text-lg sm:text-xl"
                     whileHover={{ scale: 1.1, rotate: 5 }}
                   >
                     {testimonials[activeIndex].avatar}
                   </motion.div>
                   <div>
-                    <p className="font-semibold text-foreground text-lg">
+                    <p className="font-semibold text-foreground text-base sm:text-lg">
                       {testimonials[activeIndex].name}
                     </p>
                     <p className="text-muted-foreground">
@@ -210,7 +210,7 @@ const Testimonials = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4"
+          className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4"
         >
           {testimonials.map((testimonial, index) => (
             <motion.button
@@ -219,7 +219,7 @@ const Testimonials = () => {
                 setAutoPlay(false);
                 setActiveIndex(index);
               }}
-              className={`p-4 rounded-xl text-left transition-all duration-300 ${
+              className={`p-3 sm:p-4 rounded-xl text-left transition-all duration-300 touch-manipulation ${
                 index === activeIndex
                   ? "bg-primary text-primary-foreground shadow-glow"
                   : "bg-card hover:bg-card/80"
@@ -227,9 +227,9 @@ const Testimonials = () => {
               whileHover={{ y: -4 }}
               whileTap={{ scale: 0.98 }}
             >
-              <div className="flex items-center gap-3 mb-2">
+              <div className="flex items-center gap-2 sm:gap-3 mb-2">
                 <div
-                  className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ${
+                  className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-semibold text-sm sm:text-base ${
                     index === activeIndex
                       ? "bg-primary-foreground/20 text-primary-foreground"
                       : "bg-primary/10 text-primary"

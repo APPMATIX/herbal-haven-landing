@@ -4,7 +4,6 @@ import { ArrowRight, Leaf, Sparkles } from "lucide-react";
 import { motion, useScroll, useTransform, useInView, animate } from "framer-motion";
 import heroBg from "@/assets/hero-bg.jpg";
 
-// Counting animation component
 const CountUp = ({ end, suffix = "" }: { end: number; suffix?: string }) => {
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.5 });
@@ -12,13 +11,11 @@ const CountUp = ({ end, suffix = "" }: { end: number; suffix?: string }) => {
 
   useEffect(() => {
     if (!isInView) return;
-
     const controls = animate(0, end, {
       duration: 2,
       ease: "easeOut",
       onUpdate: (value) => setCount(Math.floor(value)),
     });
-
     return () => controls.stop();
   }, [isInView, end]);
 
@@ -49,7 +46,7 @@ const Hero = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-[100svh] flex items-center justify-center overflow-hidden"
     >
       {/* Parallax Background Image */}
       <motion.div className="absolute inset-0 z-0" style={{ y: backgroundY }}>
@@ -58,11 +55,11 @@ const Hero = () => {
           alt="Herbal garden"
           className="w-full h-[120%] object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-foreground/40 via-foreground/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-foreground/50 via-foreground/30 to-foreground/10 md:from-foreground/40 md:via-foreground/20 md:to-transparent" />
       </motion.div>
 
-      {/* Floating Particles */}
-      <div className="absolute inset-0 z-5 overflow-hidden pointer-events-none">
+      {/* Floating Particles - hidden on mobile for performance */}
+      <div className="absolute inset-0 z-5 overflow-hidden pointer-events-none hidden sm:block">
         {[...Array(6)].map((_, i) => (
           <motion.div
             key={i}
@@ -88,7 +85,7 @@ const Hero = () => {
 
       {/* Content */}
       <motion.div
-        className="container mx-auto px-6 relative z-10 pt-20"
+        className="container mx-auto px-5 sm:px-6 relative z-10 pt-20"
         style={{ y: textY, opacity }}
       >
         <div className="max-w-2xl">
@@ -97,24 +94,19 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={isLoaded ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="inline-flex items-center gap-2 bg-primary/20 backdrop-blur-sm text-primary-foreground px-4 py-2 rounded-full mb-6"
+            className="inline-flex items-center gap-2 bg-primary/20 backdrop-blur-sm text-primary-foreground px-3 sm:px-4 py-1.5 sm:py-2 rounded-full mb-4 sm:mb-6"
           >
-            <motion.div
-              animate={{ rotate: [0, 360] }}
-              transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-            >
-              <Leaf className="h-4 w-4" />
-            </motion.div>
-            <span className="text-sm font-medium">100% Natural & Organic</span>
+            <Leaf className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+            <span className="text-xs sm:text-sm font-medium">100% Natural & Organic</span>
             <Sparkles className="h-3 w-3 text-accent" />
           </motion.div>
 
-          {/* Heading with staggered animation */}
+          {/* Heading */}
           <motion.h1
             initial={{ opacity: 0, y: 40 }}
             animate={isLoaded ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.4 }}
-            className="text-5xl md:text-7xl font-serif font-bold text-primary-foreground mb-6 leading-tight"
+            className="text-4xl sm:text-5xl md:text-7xl font-serif font-bold text-primary-foreground mb-4 sm:mb-6 leading-tight"
           >
             <motion.span
               initial={{ opacity: 0, x: -30 }}
@@ -139,7 +131,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={isLoaded ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.9 }}
-            className="text-lg md:text-xl text-primary-foreground/90 mb-8 max-w-lg"
+            className="text-base sm:text-lg md:text-xl text-primary-foreground/90 mb-6 sm:mb-8 max-w-lg"
           >
             Discover our handcrafted collection of herbal remedies, sourced from
             the finest organic gardens and prepared with centuries-old wisdom.
@@ -150,10 +142,10 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={isLoaded ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 1.1 }}
-            className="flex flex-col sm:flex-row gap-4"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4"
           >
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
-              <Button size="lg" className="group" asChild>
+              <Button size="lg" className="group w-full sm:w-auto h-12 sm:h-11 text-base sm:text-sm touch-manipulation" asChild>
                 <a href="#products">
                   Explore Products
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
@@ -164,7 +156,7 @@ const Hero = () => {
               <Button
                 size="lg"
                 variant="outline"
-                className="bg-background/10 backdrop-blur-sm border-primary-foreground/30 text-primary-foreground hover:bg-background/20"
+                className="bg-background/10 backdrop-blur-sm border-primary-foreground/30 text-primary-foreground hover:bg-background/20 w-full sm:w-auto h-12 sm:h-11 text-base sm:text-sm touch-manipulation"
                 asChild
               >
                 <a href="#about">Learn Our Story</a>
@@ -178,7 +170,7 @@ const Hero = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 0.6 }}
-            className="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-primary-foreground/20"
+            className="grid grid-cols-3 gap-4 sm:gap-6 mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-primary-foreground/20"
           >
             {[
               { value: 20, suffix: "+", label: "Herbal Products" },
@@ -191,25 +183,19 @@ const Hero = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.15 }}
-                whileHover={{ scale: 1.1 }}
                 className="cursor-default"
               >
-                <motion.p 
-                  className="text-3xl md:text-4xl font-serif font-bold text-primary-foreground"
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                >
+                <p className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-primary-foreground">
                   <CountUp end={stat.value} suffix={stat.suffix} />
-                </motion.p>
-                <p className="text-sm text-primary-foreground/70">{stat.label}</p>
+                </p>
+                <p className="text-xs sm:text-sm text-primary-foreground/70">{stat.label}</p>
               </motion.div>
             ))}
           </motion.div>
         </div>
       </motion.div>
 
-      {/* Scroll Indicator */}
+      {/* Scroll Indicator - hidden on small mobile */}
       <motion.button
         initial={{ opacity: 0 }}
         animate={isLoaded ? { opacity: 1 } : {}}
@@ -217,9 +203,8 @@ const Hero = () => {
         onClick={() => {
           document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' });
         }}
-        whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 cursor-pointer"
+        className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 z-10 cursor-pointer hidden sm:block"
         aria-label="Scroll to products"
       >
         <motion.div
@@ -234,9 +219,6 @@ const Hero = () => {
           />
         </motion.div>
       </motion.button>
-
-      {/* Decorative Elements */}
-      {/* Bottom fade removed for cleaner look */}
     </section>
   );
 };

@@ -28,7 +28,7 @@ const Newsletter = () => {
   };
 
   return (
-    <section className="py-24 bg-primary relative overflow-hidden" ref={sectionRef}>
+    <section className="py-16 sm:py-24 bg-primary relative overflow-hidden" ref={sectionRef}>
       {/* Animated Decorative Elements */}
       <motion.div
         className="absolute top-0 left-0 w-64 h-64 bg-accent/20 rounded-full blur-3xl"
@@ -73,7 +73,7 @@ const Newsletter = () => {
         </motion.div>
       ))}
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-5 sm:px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -100,7 +100,7 @@ const Newsletter = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-4xl md:text-5xl font-serif font-bold text-primary-foreground mb-4"
+            className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-primary-foreground mb-4"
           >
             Join Our Wellness Community
           </motion.h2>

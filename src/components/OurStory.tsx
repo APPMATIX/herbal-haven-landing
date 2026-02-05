@@ -22,7 +22,7 @@ const OurStory = () => {
 
   return (
     <section id="about" className="py-16 md:py-24 bg-secondary/30">
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-5 sm:px-6">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Content */}
           <motion.div
